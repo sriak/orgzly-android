@@ -62,6 +62,7 @@ import com.orgzly.android.ui.fragments.NoteFragment;
 import com.orgzly.android.ui.fragments.NoteListFragment;
 import com.orgzly.android.ui.fragments.SettingsFragment;
 import com.orgzly.android.ui.fragments.SyncFragment;
+import com.orgzly.android.ui.fragments.TagsFragment;
 import com.orgzly.android.ui.util.ActivityUtils;
 import com.orgzly.android.util.AppPermissions;
 import com.orgzly.android.util.LogUtils;
@@ -81,6 +82,7 @@ public class MainActivity extends CommonActivity
         ActionModeListener,
         FilterFragment.FilterFragmentListener,
         FiltersFragment.FiltersFragmentListener,
+        TagsFragment.TagsFragmentListener,
         BooksFragment.BooksFragmentListener,
         BookFragment.BookFragmentListener,
         NoteFragment.NoteFragmentListener,
@@ -1549,5 +1551,10 @@ public class MainActivity extends CommonActivity
         } else if (item instanceof DrawerFragment.FilterItem) {
             mDisplayManager.drawerSearchRequest(((DrawerFragment.FilterItem) item).query);
         }
+    }
+
+    @Override
+    public void onFilterRequest(String filter) {
+        mDisplayManager.drawerSearchRequest("t." + filter);
     }
 }

@@ -86,6 +86,7 @@
     <declare-styleable name="Icons">
         <attr name="oic_drawer_sync_button" format="reference"/>
         <attr name="oic_drawer_filters" format="reference"/>
+        <attr name="oic_drawer_tags" format="reference"/>
         <attr name="oic_drawer_notebooks" format="reference"/>
         <attr name="oic_drawer_settings" format="reference"/>
         <attr name="oic_drawer_item_modified" format="reference"/>
