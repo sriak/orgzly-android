@@ -224,6 +224,7 @@
     <string name="fragment_note_deadline_alarms_not_implemented">Note: Alarms are not implemented yet</string>
 
     <string name="no_notebooks">You have no notebooks</string>
+    <string name="no_tags">You have no tags</string>
     <string name="no_notes">Notebook has no notes</string>
     <string name="create_new_repository_for_syncing">Create new repository for syncing your notebooks</string>
 

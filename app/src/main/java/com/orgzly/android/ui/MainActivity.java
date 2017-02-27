@@ -63,6 +63,7 @@ import com.orgzly.android.ui.fragments.NoteFragment;
 import com.orgzly.android.ui.fragments.NoteListFragment;
 import com.orgzly.android.ui.fragments.SettingsFragment;
 import com.orgzly.android.ui.fragments.SyncFragment;
+import com.orgzly.android.ui.fragments.TagsFragment;
 import com.orgzly.android.ui.util.ActivityUtils;
 import com.orgzly.android.util.AppPermissions;
 import com.orgzly.android.util.LogUtils;
@@ -82,6 +83,7 @@ public class MainActivity extends CommonActivity
         ActionModeListener,
         FilterFragment.FilterFragmentListener,
         FiltersFragment.FiltersFragmentListener,
+        TagsFragment.TagsFragmentListener,
         BooksFragment.BooksFragmentListener,
         BookFragment.BookFragmentListener,
         NoteFragment.NoteFragmentListener,
@@ -1536,7 +1538,12 @@ public class MainActivity extends CommonActivity
         popBackStackAndCloseKeyboard();
     }
 
-//    private void tryDisplayingTooltip() {
+    @Override
+    public void onFilterRequest(String filter) {
+        mDisplayManager.displayTags();
+    }
+
+    //    private void tryDisplayingTooltip() {
 //        if (mTooltip == null) {
 //            mTooltip = Tooltips.display(this, mIsDrawerOpen);
 //
@@ -1571,8 +1578,10 @@ public class MainActivity extends CommonActivity
 
                 } else if (item instanceof DrawerFragment.FiltersItem) {
                     mDisplayManager.displayFilters();
-
-                } else if (item instanceof DrawerFragment.SettingsItem) {
+                } else if (item instanceof DrawerFragment.TagsItem) {
+                    mDisplayManager.displayTags();
+                }
+                else if (item instanceof DrawerFragment.SettingsItem) {
                     mDisplayManager.displaySettings();
 
                 } else if (item instanceof DrawerFragment.BookItem) {

@@ -17,6 +17,7 @@ import com.orgzly.android.ui.fragments.FiltersFragment;
 import com.orgzly.android.ui.fragments.NoteFragment;
 import com.orgzly.android.ui.fragments.QueryFragment;
 import com.orgzly.android.ui.fragments.SettingsFragment;
+import com.orgzly.android.ui.fragments.TagsFragment;
 import com.orgzly.android.util.LogUtils;
 
 public class DisplayManager {
@@ -65,6 +66,7 @@ public class DisplayManager {
                 .commit();
     }
 
+
     /**
      * Return to original state.
      * Removes all fragments and then adds BooksFragment.
@@ -91,6 +93,21 @@ public class DisplayManager {
                 .replace(R.id.single_pane_container, fragment, FiltersFragment.FRAGMENT_TAG);
 
 
+        t.commit();
+    }
+
+    public void displayTags() {
+        if(isFragmentDisplayed(TagsFragment.FRAGMENT_TAG) != null) {
+            return;
+        }
+
+        Fragment fragment = TagsFragment.getInstance();
+
+        FragmentTransaction t = mFragmentManager
+                .beginTransaction()
+                .setTransition(FRAGMENT_TRANSITION)
+                .addToBackStack(null)
+                .replace(R.id.single_pane_container,fragment,TagsFragment.FRAGMENT_TAG);
         t.commit();
     }
 
