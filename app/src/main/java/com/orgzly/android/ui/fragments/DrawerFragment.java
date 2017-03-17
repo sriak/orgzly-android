@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import com.orgzly.BuildConfig;
 import com.orgzly.R;
 import com.orgzly.android.Book;
@@ -451,14 +452,6 @@ public class DrawerFragment extends ListFragment
         FilterItem(String name, String query) {
             this.name = name;
             this.query = query;
-        }
-    }
-
-    public class TagsItem extends DrawerItem {
-        TagsItem() {
-            this.name = getString(R.string.tags);
-            this.icon = R.styleable.Icons_oic_drawer_tags;
-            this.textSize = R.styleable.FontSize_item_drawer_title_text_size;
         }
     }
 

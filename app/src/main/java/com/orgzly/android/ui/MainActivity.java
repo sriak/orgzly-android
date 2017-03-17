@@ -1582,11 +1582,6 @@ public class MainActivity extends CommonActivity
 
                 } else if (item instanceof DrawerFragment.FiltersItem) {
                     mDisplayManager.displayFilters();
-
-                }  else if (item instanceof DrawerFragment.TagsItem) {
-                    finishActionMode();
-
-                    mDisplayManager.drawerTagsRequest();
                 } else if (item instanceof DrawerFragment.TagsItem) {
                     mDisplayManager.displayTags();
                 }
@@ -1613,6 +1608,4 @@ public class MainActivity extends CommonActivity
     private void runDelayedAfterDrawerClose(Runnable runnable) {
         new Handler().postDelayed(runnable, 300);
     }
-
-
 }

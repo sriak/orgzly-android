@@ -226,7 +226,6 @@
     <string name="no_notebooks">You have no notebooks</string>
     <string name="no_tags">You have no tags</string>
     <string name="no_notes">Notebook has no notes</string>
-    <string name="no_tags">You have no tags</string>
     <string name="create_new_repository_for_syncing">Create new repository for syncing your notebooks</string>
 
     <string name="no_filters">You have no saved searches</string>
