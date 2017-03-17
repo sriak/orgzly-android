@@ -82,8 +82,8 @@ public class MainActivity extends CommonActivity
         ActionModeListener,
         FilterFragment.FilterFragmentListener,
         FiltersFragment.FiltersFragmentListener,
-        BooksFragment.BooksFragmentListener,
         TagsFragment.TagsFragmentListener,
+        BooksFragment.BooksFragmentListener,
         BookFragment.BookFragmentListener,
         NoteFragment.NoteFragmentListener,
         SyncFragment.SyncFragmentListener,
@@ -354,7 +354,10 @@ public class MainActivity extends CommonActivity
     }
 
     private void importGettingStartedNotebook() {
-        mSyncFragment.loadBook(GETTING_STARTED_NOTEBOOK_NAME, getResources(), GETTING_STARTED_NOTEBOOK_RESOURCE_ID);
+        mSyncFragment.loadBook(
+                GETTING_STARTED_NOTEBOOK_NAME,
+                getResources(),
+                GETTING_STARTED_NOTEBOOK_RESOURCE_ID);
     }
 
     private boolean checkIfNewAndUpdateVersion() {
@@ -1139,16 +1142,9 @@ public class MainActivity extends CommonActivity
                 ACTIVITY_REQUEST_CODE_FOR_FILE_CHOOSER);
     }
 
-    /**
-     * Clears few preferences' flags.
-     */
     @Override
-    public void onGettingStartedNotebookReload() {
+    public void onGettingStartedNotebookReloadRequest() {
         importGettingStartedNotebook();
-
-//        mAppPrefs.setLastUsedVersionCode(0);
-//        mAppPrefs.setIsGettingStartedNotebookLoaded(false);
-//        performIntros();
     }
 
     @Override

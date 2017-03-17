@@ -12,7 +12,6 @@ import android.widget.ListView;
 import com.orgzly.BuildConfig;
 import com.orgzly.R;
 import com.orgzly.android.Shelf;
-import com.orgzly.android.ui.ActionModeListener;
 import com.orgzly.android.ui.FragmentListener;
 import com.orgzly.android.util.LogUtils;
 
@@ -21,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
+
 
 /**
  * Created by raph on 2/21/17.
