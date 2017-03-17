@@ -48,6 +48,7 @@ public class DrawerFragment extends ListFragment
     /* Drawer list items. */
     private FiltersItem filtersHeader;
     private final List<FilterItem> filters = new ArrayList<>();
+    private TagsItem tagsHeader;
     private BooksItem booksHeader;
     private final List<BookItem> books = new ArrayList<>();
     private SettingsItem settingsHeader;
@@ -139,6 +140,7 @@ public class DrawerFragment extends ListFragment
 
         /* Setup drawer list's header items. */
         filtersHeader = new FiltersItem();
+        tagsHeader = new TagsItem();
         booksHeader = new BooksItem();
         settingsHeader = new SettingsItem();
     }
@@ -321,6 +323,8 @@ public class DrawerFragment extends ListFragment
             mListAdapter.add(item);
         }
 
+        mListAdapter.add(tagsHeader);
+
         mListAdapter.add(booksHeader);
 
         for (DrawerItem item: books) {
@@ -421,6 +425,14 @@ public class DrawerFragment extends ListFragment
 
         public String toString() {
             return name;
+        }
+    }
+
+    public class TagsItem extends DrawerItem {
+        TagsItem() {
+            this.name = getString(R.string.tags);
+            this.icon = R.styleable.Icons_oic_drawer_tags;
+            this.textSize = R.styleable.FontSize_item_drawer_title_text_size;
         }
     }
 

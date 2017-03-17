@@ -95,6 +95,7 @@
 
         <item name="oic_drawer_sync_button">@drawable/ic_sync_black_24dp</item>
         <item name="oic_drawer_filters">@drawable/ic_search_black_24dp</item>
+        <item name="oic_drawer_tags">@drawable/ic_tags_black_24dp</item>
         <item name="oic_drawer_notebooks">@drawable/ic_my_library_books_black_24dp</item>
         <item name="oic_drawer_settings">@drawable/ic_settings_black_24dp</item>
         <item name="oic_drawer_item_modified">@drawable/ic_sync_grey600_18dp</item>

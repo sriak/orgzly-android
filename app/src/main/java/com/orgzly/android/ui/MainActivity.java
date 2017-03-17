@@ -62,6 +62,7 @@ import com.orgzly.android.ui.fragments.NoteFragment;
 import com.orgzly.android.ui.fragments.NoteListFragment;
 import com.orgzly.android.ui.fragments.SettingsFragment;
 import com.orgzly.android.ui.fragments.SyncFragment;
+import com.orgzly.android.ui.fragments.TagsFragment;
 import com.orgzly.android.ui.util.ActivityUtils;
 import com.orgzly.android.util.AppPermissions;
 import com.orgzly.android.util.LogUtils;
@@ -82,6 +83,7 @@ public class MainActivity extends CommonActivity
         FilterFragment.FilterFragmentListener,
         FiltersFragment.FiltersFragmentListener,
         BooksFragment.BooksFragmentListener,
+        TagsFragment.TagsFragmentListener,
         BookFragment.BookFragmentListener,
         NoteFragment.NoteFragmentListener,
         SyncFragment.SyncFragmentListener,
@@ -89,7 +91,7 @@ public class MainActivity extends CommonActivity
         BookPrefaceFragment.EditorListener,
         NoteListFragment.NoteListFragmentListener,
         SettingsFragment.SettingsFragmentListener,
-        DrawerFragment.DrawerFragmentListener {
+        DrawerFragment.DrawerFragmentListener{
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -106,14 +108,18 @@ public class MainActivity extends CommonActivity
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    /** isDrawerOpen() is not reliable - there was a race condition - closing drawer VS fragment resume. */
+    /**
+     * isDrawerOpen() is not reliable - there was a race condition - closing drawer VS fragment resume.
+     */
     private boolean mIsDrawerOpen = false;
 
 
     private CharSequence mSavedTitle;
     private CharSequence mSavedSubtitle;
 
-    /** Original title used when book is not being displayed. */
+    /**
+     * Original title used when book is not being displayed.
+     */
     private CharSequence mDefaultTitle;
 
     private DisplayManager mDisplayManager;
@@ -332,7 +338,7 @@ public class MainActivity extends CommonActivity
 
         if (isNewVersion) {
             /* Import Getting Started notebook. */
-            if (! AppPreferences.isGettingStartedNotebookLoaded(this)) {
+            if (!AppPreferences.isGettingStartedNotebookLoaded(this)) {
                 importGettingStartedNotebook();
                 /* This will be marked as done after book has been loaded in onBookLoaded(). */
             }
@@ -532,7 +538,7 @@ public class MainActivity extends CommonActivity
     }
 
     private void menuItemsSetVisible(Menu menu, boolean visible) {
-        for(int i = 0; i < menu.size(); i++){
+        for (int i = 0; i < menu.size(); i++) {
             menu.getItem(i).setVisible(visible);
         }
     }
@@ -623,9 +629,9 @@ public class MainActivity extends CommonActivity
      * Note has been clicked in list view.
      *
      * @param fragment Fragment from which the action came.
-     * @param view view
+     * @param view     view
      * @param position note position in list
-     * @param noteId note ID
+     * @param noteId   note ID
      */
     @Override
     public void onNoteClick(NoteListFragment fragment, View view, int position, long noteId) {
@@ -648,9 +654,9 @@ public class MainActivity extends CommonActivity
      * Note has been long-clicked in list view.
      *
      * @param fragment Fragment from which the action came.
-     * @param view view
+     * @param view     view
      * @param position note position in list
-     * @param noteId note ID
+     * @param noteId   note ID
      */
     @Override
     public void onNoteLongClick(NoteListFragment fragment, View view, int position, long noteId) {
@@ -882,7 +888,7 @@ public class MainActivity extends CommonActivity
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         boolean deleteLinked = checkBox.isChecked();
 
@@ -998,7 +1004,7 @@ public class MainActivity extends CommonActivity
     }
 
     private void doRenameBook(Book book, String name, TextInputLayout inputLayout) {
-        if (! TextUtils.isEmpty(name)) {
+        if (!TextUtils.isEmpty(name)) {
             inputLayout.setError(null);
             mSyncFragment.renameBook(book, name);
 
@@ -1028,9 +1034,9 @@ public class MainActivity extends CommonActivity
          * FIXME: Skipping ContentRepo for now, as we can't construct Uri for a non-existent document.
          * Repo might need changing to be repo uri + path
          */
-        for (String repoUri: repos.keySet()) {
+        for (String repoUri : repos.keySet()) {
             Repo repo = repos.get(repoUri);
-            if (! (repo instanceof ContentRepo)) {
+            if (!(repo instanceof ContentRepo)) {
                 items.put(repoUri, itemIndex++);
             }
         }
@@ -1171,7 +1177,7 @@ public class MainActivity extends CommonActivity
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         mDisplayManager.reset();
                         mSyncFragment.clearDatabase();
@@ -1238,7 +1244,7 @@ public class MainActivity extends CommonActivity
 
     /**
      * Sync finished.
-     *
+     * <p>
      * Display snackbar with a message.  If it makes sense also set action to open a repository..
      *
      * @param msg Error message if syncing failed, null if it was successful
@@ -1453,7 +1459,7 @@ public class MainActivity extends CommonActivity
          * This check is only needed for when drawer is opened for the first time
          * programmatically, before fragment got to its onResume().
          */
-        if (! mIsDrawerOpen) {
+        if (!mIsDrawerOpen) {
             /* Change titles. */
             getSupportActionBar().setTitle(mSavedTitle);
             getSupportActionBar().setSubtitle(mSavedSubtitle);
@@ -1537,6 +1543,10 @@ public class MainActivity extends CommonActivity
 
             mDisplayManager.drawerBooksRequest();
 
+        } else if (item instanceof DrawerFragment.TagsItem) {
+            finishActionMode();
+
+            mDisplayManager.drawerTagsRequest();
         } else if (item instanceof DrawerFragment.FiltersItem) {
             finishActionMode();
 
@@ -1553,5 +1563,10 @@ public class MainActivity extends CommonActivity
         } else if (item instanceof DrawerFragment.FilterItem) {
             mDisplayManager.drawerSearchRequest(((DrawerFragment.FilterItem) item).query);
         }
+    }
+
+    @Override
+    public void onFilterRequest(String filter) {
+        mDisplayManager.drawerSearchRequest("t." + filter);
     }
 }
