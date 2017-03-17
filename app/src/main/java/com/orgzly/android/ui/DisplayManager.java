@@ -96,7 +96,11 @@ public class DisplayManager {
         t.commit();
     }
 
+<<<<<<< HEAD
     public void displayTags() {
+=======
+    private void displayTags() {
+>>>>>>> Added tag filtering
         if(isFragmentDisplayed(TagsFragment.FRAGMENT_TAG) != null) {
             return;
         }
